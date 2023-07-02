@@ -1,2 +1,11 @@
-package com.rova.accountservice.dals;public class Authority {
+package com.rova.accountservice.dals;
+
+
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "authorities")
+public class Authority extends IAuthorities{
 }
