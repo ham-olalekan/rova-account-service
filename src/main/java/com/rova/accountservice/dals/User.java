@@ -3,17 +3,21 @@ package com.rova.accountservice.dals;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String reference;
 
     @Column(nullable = false)
     private String firstName;
@@ -41,15 +45,6 @@ public class Users {
     @Column
     private String imageUrl;
 
-    @Column(nullable = false)
-    private boolean enabled = true;
-
-    @Column(nullable = false)
-    private boolean passwordChanged;
-
-    @Column(nullable = false, updatable = false)
-    private String source;
-
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;
@@ -58,6 +53,17 @@ public class Users {
     @CreationTimestamp
     private Date updatedAt;
 
-    @Column
-    private Date dateOfBirth;
+    @Column(nullable = false)
+    private boolean enabled = true;
+
+    @PrePersist
+    public void appendReference(){
+        if (!StringUtils.hasText(this.reference)) {
+            this.reference = UUID.randomUUID().toString().replaceAll("-", "");
+        }
+    }
+
+    public String getReference(){
+        return String.format("%s_%s", id, reference);
+    }
 }

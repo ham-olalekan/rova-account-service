@@ -1,2 +1,15 @@
-package com.rova.accountservice.dto;public class TokensDto {
+package com.rova.accountservice.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class TokensDto {
+    private String accessToken;
+    private String refreshToken;
 }
