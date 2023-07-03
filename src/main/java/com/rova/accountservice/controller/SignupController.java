@@ -6,6 +6,7 @@ import com.rova.accountservice.dto.TokensDto;
 import com.rova.accountservice.dto.UserDto;
 import com.rova.accountservice.exceptions.CommonsException;
 import com.rova.accountservice.services.impl.UserService;
+import com.rova.accountservice.services.impl.UserServiceImpl;
 import com.rova.accountservice.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
