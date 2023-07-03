@@ -18,9 +18,10 @@ public class DefaultAntMatchersEndpoint {
         AntMatchersEndpoints antMatchersEndpoints = new AntMatchersEndpoints();
         Stack<AntMatchersEndpoints.AntMatchersEndpoint> antMatchersEndpointSet = new Stack<>();
         antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint(HttpMethod.GET, "/"));
+        antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint(HttpMethod.GET, "/swagger-ui/index.html/**"));
         antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint("/api/**", USER.name()));
-        antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint("/v1/api/**", USER.name()));
-        antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint("/api/messages/**", API_USER.name()));
+        antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint("/api/v1/user/signup/**", API_USER.name()));
+        antMatchersEndpointSet.add(new AntMatchersEndpoints.AntMatchersEndpoint("/api/v1/user/**", USER.name()));
 
         AntMatchersEndpoints.AntMatchersEndpoint antMatchersEndpoint =
                 new AntMatchersEndpoints.AntMatchersEndpoint("/actuator/**");

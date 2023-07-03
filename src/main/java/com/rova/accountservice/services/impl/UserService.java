@@ -58,6 +58,7 @@ public class UserService extends IUserService {
         user.setUsername(username);
         final String hashedPassword = passwordEncoder.encode(createUserDto.getPassword());
         user.setPassword(hashedPassword);
+        System.out.println("-->"+ hashedPassword);
         return UserDto.toDto(saveUser(user));
     }
 

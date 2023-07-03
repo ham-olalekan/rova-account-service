@@ -32,7 +32,7 @@ public class SignupController {
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping("v1/user/signup")
+    @PostMapping("/api/v1/user/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid CreateUserDto signupDto, HttpServletResponse httpServletResponse) throws CommonsException {
         UserDto userDto = userService.registerNewUser(signupDto);
