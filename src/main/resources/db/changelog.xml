@@ -9,4 +9,6 @@
     <include file="db/entities/4-insert_countries.sql"/>
     <include file="db/entities/5-create_authorities_table.sql"/>
     <include file="db/entities/5-create_users_table.sql"/>
+    <include file="db/entities/6-create_basic_auth_table.sql"/>
+    <include file="db/entities/7-insert_basic_auth_cred.sql"/>
 </databaseChangeLog>

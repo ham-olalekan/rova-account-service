@@ -2,6 +2,7 @@ package com.rova.accountservice.util;
 
 public class Constants {
 
+    public final static String BASIC_AUTH_PREFIX = "RVA_";
     public final static String JDBC_H2_URL = "jdbc:h2:mem:rova_account_service;DB_CLOSE_DELAY=-1;MODE=MySQL";
     public final static String DRIVER_CLASS_NAME = "org.h2.Driver";
 
@@ -18,6 +19,8 @@ public class Constants {
     public static final String TYPE = "type";
 
     public static class EntityNames {
+
+        public final static String BASIC_AUTHS = "basic_auths";
         public final static String USERS = "users";
 
         public final static String TOKEN_STORE = "tokens";

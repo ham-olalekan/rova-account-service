@@ -25,7 +25,6 @@ public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntr
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx)
             throws IOException {
-        authEx.printStackTrace();
         String error = "Basic Authentication - %s";
         if (request.getAttribute(PROCESSED_AUTH_TOKEN) != null) {
             request.removeAttribute(PROCESSED_AUTH_TOKEN);

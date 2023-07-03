@@ -2,6 +2,8 @@ package com.rova.accountservice.services.impl;
 
 import com.rova.accountservice.dals.IAuthorities;
 import com.rova.accountservice.dals.IUserDetails;
+import com.rova.accountservice.enums.Authorities;
+import com.rova.accountservice.exceptions.CommonsException;
 import com.rova.accountservice.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -16,11 +18,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.rova.accountservice.util.Constants.BASIC_AUTH_PREFIX;
+import static com.rova.accountservice.util.Constants.EntityNames.BASIC_AUTHS;
 
 @Service
 @Transactional
@@ -31,6 +35,8 @@ public class IUserService implements UserDetailsService{
     @Override
     @SneakyThrows
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if (username.startsWith(BASIC_AUTH_PREFIX))
+            return findBasicAuthByUsername(username);
         return findFullUserDetailsByUsername(username);
     }
 
@@ -63,5 +69,15 @@ public class IUserService implements UserDetailsService{
                 .collect(Collectors.toList());
     }
 
-
+    private IUserDetails findBasicAuthByUsername(String username) throws CommonsException {
+        String query = "SELECT username, password, enabled FROM " + BASIC_AUTHS + " WHERE username=?";
+        IUserDetails user = Optional.ofNullable(jdbcTemplate.queryForObject(query,
+                        new BeanPropertyRowMapper<>(IUserDetails.class), username))
+                .orElseThrow(() -> new CommonsException("basic.auth.user.not.found", HttpStatus.NOT_FOUND));
+        IAuthorities authorities = new IAuthorities();
+        authorities.setUsername(username);
+        authorities.setAuthority(Authorities.API_USER.name());
+        user.setAuthorities(Collections.singletonList(authorities));
+        return user;
+    }
 }

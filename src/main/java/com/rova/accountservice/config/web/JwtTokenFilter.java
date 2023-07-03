@@ -33,7 +33,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         // Get authorization header and validate
         final String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
-        System.out.println("---> "+ header);
         if (!isEmpty(header) && header.startsWith("Bearer ")) {
             httpServletRequest.setAttribute(PROCESSED_AUTH_TOKEN, true);
             try {
