@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.StringUtils;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -17,6 +18,7 @@ import static com.rova.accountservice.util.Constants.EntityNames.USERS;
 
 @Getter
 @Setter
+@Valid
 public class CreateUserDto implements ICreateUserDto {
     @Size(max = 20, min = 2, message = "firstname.accepted_length")
     @NotBlank(message = "firstname.not_blank")
