@@ -25,8 +25,8 @@ public class DefaultAntMatchersEndpoint {
 
         AntMatchersEndpoints.AntMatchersEndpoint antMatchersEndpoint =
                 new AntMatchersEndpoints.AntMatchersEndpoint("/actuator/**");
-        antMatchersEndpoint.setPermitAll(true);
         antMatchersEndpointSet.add(antMatchersEndpoint);
+        antMatchersEndpoint.setPermitAll(true);
 
         antMatchersEndpoints.setAntMatchersEndpoints(antMatchersEndpointSet);
         return antMatchersEndpoints;

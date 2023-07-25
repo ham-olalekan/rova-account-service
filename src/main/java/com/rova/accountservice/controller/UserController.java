@@ -25,23 +25,11 @@ import static com.rova.accountservice.enums.Authorities.USER_PREAUTHORIZE;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
-@PreAuthorize(USER_PREAUTHORIZE)
 public class UserController {
     private final UserService userService;
 
     @GetMapping
-    @ApiOperation(
-            value = "Get User",
-            notes = "Retrieve the user information",
-            authorizations = {
-                    @Authorization(
-                            value = "Bearer Token",
-                            scopes = {
-                                    @AuthorizationScope(scope = "read:user", description = "Read user information")
-                            }
-                    )
-            }
-    )
+    @PreAuthorize(USER_PREAUTHORIZE)
     public ResponseDto<?> getUser(Authentication authentication) throws CommonsException {
         long userId = IUserDetails.getId(authentication);
         FUserDto user = userService.findByUserId(userId);
