@@ -14,10 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -36,6 +33,7 @@ public class SignupController {
 
     @PostMapping("/api/v1/user/signup")
     @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin
     public void createUser(@Valid @RequestBody CreateUserDto signupDto, HttpServletResponse httpServletResponse) throws CommonsException {
         UserDto userDto = userService.registerNewUser(signupDto);
 
